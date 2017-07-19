@@ -1,0 +1,4 @@
+bind main = !git fixup %(commit)
+bind main <Ctrl-r> !git rebase --autosquash -i %(commit)
+bind status c !git commit -m "[WSM02] update .config"
+bind generic s view-status
