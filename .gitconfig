@@ -16,3 +16,4 @@
 	pretty = oneline
 [log]
 	abbrevCommit = true
+	decorate = auto
