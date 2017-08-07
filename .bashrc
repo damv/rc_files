@@ -122,7 +122,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/dvielpeau/bins/gitslave:/home/dvielpeau/bins
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/dvielpeau/bins/gitslave:/home/dvielpeau/bins:/home/dvielpeau/scripts
 
 alias gits='gits -n -p 8'
 
