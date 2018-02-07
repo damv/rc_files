@@ -146,3 +146,4 @@ export w="/home/dvielpeau/repos/embedded-firmware/embedded/firmware/kinetis/wsm0
 
 export PYTHONPATH=$PYTHONPATH:/home/dvielpeau/repos/naimon-utils
 
+alias vim="vim -X"
