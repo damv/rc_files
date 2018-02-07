@@ -132,20 +132,11 @@ set -o vi
 PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
 #PROMPT_DIRTRIM=2
 
-# Yavide alias
-alias yavide="gvim --servername yavide -f -N -u /opt/yavide/.vimrc"
-
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
 
 . ~/repos/scripts/git-completion.bash
 __git_complete gits __git_main
 
-# virtualenv wrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
 
-# GO path
-export GOPATH=~/go/
 
