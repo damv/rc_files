@@ -122,7 +122,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/dvielpeau/bins/gitslave:/home/dvielpeau/bins:/home/dvielpeau/scripts
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/dvielpeau/bins/gitslave:/home/dvielpeau/bins:/home/dvielpeau/repos/scripts
 
 alias gits='gits -n -p 8'
 
@@ -138,7 +138,7 @@ alias yavide="gvim --servername yavide -f -N -u /opt/yavide/.vimrc"
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
 
-. ~/scripts/git-completion.bash
+. ~/repos/scripts/git-completion.bash
 __git_complete gits __git_main
 
 # virtualenv wrapper
