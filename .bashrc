@@ -138,5 +138,10 @@ alias getclip='xclip -selection clipboard -o'
 . ~/repos/scripts/git-completion.bash
 __git_complete gits __git_main
 
+# cd shortuts
+shopt -s cdable_vars
+export f="/home/dvielpeau/repos/embedded-firmware/embedded/firmware"
+export o="/home/dvielpeau/repos/embedded-firmware/embedded/wsobject"
+export w="/home/dvielpeau/repos/embedded-firmware/embedded/firmware/kinetis/wsm02"
 
 
