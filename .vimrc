@@ -28,9 +28,18 @@ set matchtime=3
 " display incomplete commands
 set showcmd
 
-" Highlight cursor line
-set cursorline
+" Highlight cursor line and 80th column in dark grey
+hi ColorColumn ctermbg=234 guibg=darkgrey
+autocmd FileType cpp,c,cxx,h,hpp,python,sh  setlocal cc=80
+augroup CursorLine
+	au!
+	au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+	au VimEnter,WinEnter,BufWinEnter * set cul
+	au WinLeave * setlocal nocursorline
+	au WinLeave * set nocul
+augroup END
 hi CursorLine cterm=NONE ctermbg=234 guibg=darkgrey
+set cursorline
 
 " Autocompletion in file names
 set wildmenu
@@ -79,10 +88,6 @@ highlight SpecialKey ctermfg=8
 set listchars+=nbsp:X
 set list
 
-" Hihghlight 80th column in dark grey
-hi ColorColumn ctermbg=234 guibg=darkgrey
-autocmd FileType cpp,c,cxx,h,hpp,python,sh  setlocal cc=80
-
 " Disable timeout
 set timeoutlen=1000 ttimeoutlen=0
 
@@ -91,6 +96,13 @@ set autoread
 
 " Absolute line numbers
 set norelativenumber
+
+" Better active split highlight
+hi StatusLine   ctermfg=15 guifg=#ffffff ctermbg=237 guibg=#4e4e4e cterm=none gui=none
+hi StatusLineNC ctermfg=15 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
+highlight VertSplit ctermbg=237 ctermfg=237
+hi LineNr ctermfg=242
+
 
 " Move easely between splits
 nnoremap <silent> <c-h> <c-w><c-h>
