@@ -143,6 +143,7 @@ shopt -s cdable_vars
 export f="/home/dvielpeau/repos/embedded-firmware/embedded/firmware"
 export o="/home/dvielpeau/repos/embedded-firmware/embedded/wsobject"
 export w="/home/dvielpeau/repos/embedded-firmware/embedded/firmware/kinetis/wsm02"
+export d="/home/dvielpeau/repos/embedded-firmware/embedded/dblib-ng"
 
 export PYTHONPATH=$PYTHONPATH:/home/dvielpeau/repos/naimon-utils
 
