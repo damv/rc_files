@@ -110,6 +110,12 @@ nnoremap <silent> <c-j> <c-w><c-j>
 nnoremap <silent> <c-k> <c-w><c-k>
 nnoremap <silent> <c-l> <c-w><c-l>
 
+" Resize splits easely
+nnoremap <silent> + <c-w>+
+nnoremap <silent> - <c-w>-
+nnoremap <silent> = <c-w>=
+
+
 " For rust : auto format on save
 let g:rustfmt_autosave = 1
 
