@@ -122,7 +122,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/dvielpeau/bins/gitslave:/home/dvielpeau/bins:/home/dvielpeau/repos/scripts
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 alias gits='gits -n -p 8'
 
@@ -135,16 +135,11 @@ PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
 
-. ~/repos/scripts/git-completion.bash
-__git_complete gits __git_main
-
 # cd shortuts
 shopt -s cdable_vars
-export f="/home/dvielpeau/repos/embedded-firmware/embedded/firmware"
-export o="/home/dvielpeau/repos/embedded-firmware/embedded/wsobject"
-export w="/home/dvielpeau/repos/embedded-firmware/embedded/firmware/kinetis/wsm02"
-export d="/home/dvielpeau/repos/embedded-firmware/embedded/dblib-ng"
-
-export PYTHONPATH=$PYTHONPATH:/home/dvielpeau/repos/naimon-utils
+export f="/home/dvi/repos/es_firmware/"
 
 alias vim="vim -X"
+
+cd ~/repos/es_firmware
+
