@@ -125,5 +125,8 @@ set splitright
 
 " Persistent undo
 set undofile
-
 set undodir=~/.vimundo
+
+" Include vimrc of current dir
+set exrc
+
