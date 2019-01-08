@@ -1,5 +1,8 @@
 " Pathogen
 execute pathogen#infect()
+" plugins :
+"   vim-better-whitespace
+"   vim-tmux-navigator
 
 " Filetype based identation
 filetype plugin indent on
@@ -76,10 +79,6 @@ nnoremap <space> :noh<cr>
 
 " show line numbers
 set number
-
-" show trailing whitespaces
-highlight ExtraWhitespace ctermbg=52 guibg=darkred
-match ExtraWhitespace /\s\+$/
 
 " show tabs
 set listchars=tab:\|\ 
