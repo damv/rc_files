@@ -65,6 +65,9 @@ hi StatusLine ctermbg=black ctermfg=darkgrey
 " Ctags
 set tags=tags;
 
+" Present list if multiple tags match
+nnoremap <C-]> g<C-]>
+
 " remap / to ignore regex
 nnoremap / /\V
 vnoremap / /\V
