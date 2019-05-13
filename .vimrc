@@ -132,3 +132,5 @@ set undodir=~/.vimundo
 " Include vimrc of current dir
 set exrc
 
+" Add pwd to path
+set path=$PWD/**
