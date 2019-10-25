@@ -31,6 +31,14 @@ set matchtime=3
 " display incomplete commands
 set showcmd
 
+" relative line numbers
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 " Highlight cursor line and 80th column in dark grey
 hi ColorColumn ctermbg=234 guibg=darkgrey
 autocmd FileType cpp,c,cxx,h,hpp,python,sh  setlocal cc=80
