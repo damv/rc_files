@@ -100,11 +100,10 @@ set autoread
 set norelativenumber
 
 " Better active split highlight
-hi StatusLine   ctermfg=15 guifg=#ffffff ctermbg=237 guibg=#4e4e4e cterm=none gui=none
-hi StatusLineNC ctermfg=15 guifg=#b2b2b2 ctermbg=237 guibg=#3a3a3a cterm=none gui=none
+hi StatusLine   ctermfg=15 guifg=#ffffff ctermbg=235 guibg=#4e4e4e cterm=none gui=none
+hi StatusLineNC ctermfg=15 guifg=#b2b2b2 ctermbg=235 guibg=#3a3a3a cterm=none gui=none
 highlight VertSplit ctermbg=237 ctermfg=237
 hi LineNr ctermfg=242
-
 
 " Move easely between splits
 nnoremap <silent> <c-h> <c-w><c-h>
