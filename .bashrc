@@ -61,10 +61,18 @@ parse_git_branch() {
  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+# Add red X if last command exit with rc != 0
+rc_check() {
+	local rc=$?
+	if [ ! ${rc} -eq 0 ]; then
+		echo -e "\e[2mrc=${rc}\n\e[0m"
+	fi
+}
+
 if [ "$color_prompt" = yes ]; then
-   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;33m\]$([ \j -gt 0 ] && echo "[\j] ")\[\033[00m\]\[\033[01;34m\]\w\[\033[01;35m\]$(parse_git_branch)\[\033[00m\]\n$ '
+	PS1='$(rc_check)${debian_chroot:+($debian_chroot)}\[\033[01;93m\]\u@\h\[\033[00m\] \[\033[01;33m\]$([ \j -gt 0 ] && echo "[\j] ")\[\033[00m\]\[\033[01;34m\]\w\[\033[01;35m\]$(parse_git_branch)\[\033[00m\]\n$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h \w\$(parse_git_branch) \$  '
+	PS1='${debian_chroot:+($debian_chroot)}\u@\h \w\$(parse_git_branch) \$  '
 fi
 unset color_prompt force_color_prompt
 
