@@ -141,3 +141,11 @@ set exrc
 
 " Add pwd to path
 set path=$PWD/**
+
+" Ack use ag
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev ack Ack
+
+" Selection in vim add to middle clic clipboard
+set clipboard=unnamedplus
