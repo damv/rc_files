@@ -40,8 +40,8 @@ augroup numbertoggle
 augroup END
 
 " Highlight cursor line and 80th column in dark grey
-hi ColorColumn ctermbg=234 guibg=darkgrey
-autocmd FileType cpp,c,cxx,h,hpp,python,sh  setlocal cc=80
+" hi ColorColumn ctermbg=234 guibg=darkgrey
+" autocmd FileType cpp,c,cxx,h,hpp,python,sh  setlocal cc=80
 augroup CursorLine
 	au!
 	au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -50,7 +50,9 @@ augroup CursorLine
 	au WinLeave * set nocul
 augroup END
 hi CursorLine cterm=NONE ctermbg=234 guibg=darkgrey
-set cursorline
+
+" Custom lighterstatus line
+set statusline=%f\ %h%w%m%r
 
 " Autocompletion in file names
 set wildmenu
@@ -110,7 +112,7 @@ set norelativenumber
 " Better active split highlight
 hi StatusLine   ctermfg=15 guifg=#ffffff ctermbg=235 guibg=#4e4e4e cterm=none gui=none
 hi StatusLineNC ctermfg=15 guifg=#b2b2b2 ctermbg=235 guibg=#3a3a3a cterm=none gui=none
-highlight VertSplit ctermbg=237 ctermfg=237
+highlight VertSplit ctermbg=235 ctermfg=235
 hi LineNr ctermfg=242
 
 " Move easely between splits
