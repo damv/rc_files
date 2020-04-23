@@ -1,5 +1,4 @@
 [user]
-	email = damien.vielpeau@withings.com
 	name = Damien Vielpeau
 [branch]
 	autosetuprebase = always
@@ -7,8 +6,12 @@
 	fontdiff = Ubuntu Mono,11,-1,5,50,0,0,0,0,0
 	boldheaders = true
 	spellcheck = false
+	expandtab = false
+	tabwidth = 8
+	textwidth = 80
 [gui]
 	editor = vim
+	diffcontext = 8
 [push]
 	default = simple
 [alias]
@@ -27,3 +30,7 @@
 	required = true
 [interactive]
 	singleKey = true
+[merge]
+	tool = meld
+[diff]
+	tool = meld

@@ -130,7 +130,7 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:/snap/bin:/usr/games/
 
 alias gits='gits -n -p 8'
 
@@ -138,6 +138,7 @@ export EDITOR=vim
 set -o vi
 
 PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
+
 #PROMPT_DIRTRIM=2
 
 alias setclip='xclip -selection c'
@@ -145,9 +146,10 @@ alias getclip='xclip -selection clipboard -o'
 
 # cd shortuts
 shopt -s cdable_vars
-export f="/home/dvi/repos/es_firmware/"
 
 alias vim="vim -X"
+alias t='date +%R'
 
-cd ~/repos/es_firmware
+
+HISTCONTROL=ignoreboth
 

@@ -40,7 +40,7 @@ augroup numbertoggle
 augroup END
 
 " Highlight cursor line and 80th column in dark grey
-" hi ColorColumn ctermbg=234 guibg=darkgrey
+" hi ColorColumn ctermbg=234
 " autocmd FileType cpp,c,cxx,h,hpp,python,sh  setlocal cc=80
 augroup CursorLine
 	au!
@@ -49,7 +49,16 @@ augroup CursorLine
 	au WinLeave * setlocal nocursorline
 	au WinLeave * set nocul
 augroup END
-hi CursorLine cterm=NONE ctermbg=234 guibg=darkgrey
+hi CursorLine cterm=NONE ctermbg=234
+
+" Current line number bold, not underlined
+hi CursorLineNr cterm=NONE
+
+" Markdown syntax highlighting
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
 
 " Custom lighterstatus line
 set statusline=%f\ %h%w%m%r
@@ -68,6 +77,10 @@ set ttyfast
 set tabstop=8
 set softtabstop=8
 set shiftwidth=8
+
+" Except in javascript files
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType vue setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Enables status line
 hi StatusLine ctermbg=black ctermfg=darkgrey
@@ -88,7 +101,7 @@ set smartcase
 " highlights results of a search
 set hlsearch
 " disables highlighting from previous search
-nnoremap <space> :noh<cr>
+nnoremap <silent> <space> :noh<cr>
 
 " show line numbers
 set number
@@ -126,7 +139,6 @@ nnoremap <silent> + <c-w>+
 nnoremap <silent> - <c-w>-
 nnoremap <silent> = <c-w>=
 
-
 " For rust : auto format on save
 let g:rustfmt_autosave = 1
 
@@ -149,5 +161,8 @@ let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
 cnoreabbrev ack Ack
 
-" Selection in vim add to middle clic clipboard
-set clipboard=unnamedplus
+" Prevent autocompletion to search in included files
+setglobal complete-=i
+
+" cp command copy to system clipboard
+command -range Cp :silent :<line1>,<line2>w !xsel -i -b
