@@ -1,0 +1,18 @@
+[submodule "ack.vim"]
+	path = ack.vim
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "conflict-marker.vim"]
+	path = conflict-marker.vim
+	url = https://github.com/rhysd/conflict-marker.vim.git
+[submodule "vim-autoformat"]
+	path = vim-autoformat
+	url = https://github.com/chiel92/vim-autoformat.git
+[submodule "vim-better-whitespace"]
+	path = vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace.git
+[submodule "vim-tmux-navigator"]
+	path = vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim-vue"]
+	path = vim-vue
+	url = https://github.com/posva/vim-vue.git

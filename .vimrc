@@ -1,9 +1,3 @@
-" Pathogen
-execute pathogen#infect()
-" plugins :
-"   vim-better-whitespace
-"   vim-tmux-navigator
-
 " Filetype based identation
 filetype plugin indent on
 
