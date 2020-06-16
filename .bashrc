@@ -153,3 +153,4 @@ alias t='date +%R'
 
 HISTCONTROL=ignoreboth
 
+export PATH="/usr/lib/ccache:${PATH}"
