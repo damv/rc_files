@@ -160,3 +160,12 @@ setglobal complete-=i
 
 " cp command copy to system clipboard
 command -range Cp :silent :<line1>,<line2>w !xsel -i -b
+
+" Autoformat
+command A Autoformat
+cnoreabbrev a A
+
+" Autoformat then write
+command Aw Autoformat | write
+cnoreabbrev aw Aw
+
