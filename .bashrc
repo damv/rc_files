@@ -146,11 +146,21 @@ alias getclip='xclip -selection clipboard -o'
 
 # cd shortuts
 shopt -s cdable_vars
+a=~/repos/argos
+ca=~/repos/copy-argos
 
 alias vim="vim -X"
 alias t='date +%R'
 
-
 HISTCONTROL=ignoreboth
 
 export PATH="/usr/lib/ccache:${PATH}"
+
+# Make exit detach tmux sessions instead of killing them
+exit() {
+    if [[ -z $TMUX ]]; then
+        builtin exit
+    else
+        tmux detach
+    fi
+}
