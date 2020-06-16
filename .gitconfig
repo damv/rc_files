@@ -31,6 +31,6 @@
 [interactive]
 	singleKey = true
 [merge]
-	tool = meld
+	tool = vimdiff
 [diff]
-	tool = meld
+	tool = vimdiff
