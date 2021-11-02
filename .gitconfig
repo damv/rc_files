@@ -1,4 +1,5 @@
 [user]
+	email = dvi@outsight.tech
 	name = Damien Vielpeau
 [branch]
 	autosetuprebase = always
@@ -8,14 +9,21 @@
 	spellcheck = false
 	expandtab = false
 	tabwidth = 8
-	textwidth = 80
+	textwidth = 120
+	theme = flat-dark-grey
+	icontheme = dark
 [gui]
 	editor = vim
 	diffcontext = 8
 [push]
-	default = simple
+	default = current
 [alias]
 	fixup = "!f() { git commit -m\"fixup! $(git log -1 --pretty=%s $1)\"; }; f"
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	sw = switch
 [format]
 	pretty = oneline
 [log]
@@ -34,3 +42,9 @@
 	tool = vimdiff
 [diff]
 	tool = vimdiff
+[core]
+	excludesfile = ~/.gitignore_global
+[rerere]
+	enabled = true
+[remote "origin"]
+	prune = true

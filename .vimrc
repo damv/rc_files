@@ -7,7 +7,9 @@ syntax on
 
 " Enables mouse integration
 set mouse=a
-set ttymouse=sgr
+if !has('nvim')
+	set ttymouse=sgr
+endif
 
 " utf8 encoding
 set encoding=utf-8
@@ -50,8 +52,8 @@ hi CursorLineNr cterm=NONE
 
 " Markdown syntax highlighting
 augroup markdown
-    au!
-    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+	au!
+	au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
 " Custom lighterstatus line
@@ -75,6 +77,7 @@ set shiftwidth=8
 " Except in javascript files
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType vue setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Enables status line
 hi StatusLine ctermbg=black ctermfg=darkgrey
@@ -103,6 +106,7 @@ set number
 " show tabs
 set listchars=tab:\|\ 
 highlight SpecialKey ctermfg=8
+
 " show bad char
 set listchars+=nbsp:X
 set list
@@ -148,7 +152,9 @@ set undodir=~/.vimundo
 set exrc
 
 " Add pwd to path
-set path=$PWD/**
+set path+=$PWD/app/**
+set path+=$PWD/modules/**
+set path+=$PWD/alb_server/**
 
 " Ack use ag
 let g:ackprg = 'ag --vimgrep --smart-case'
@@ -161,6 +167,24 @@ setglobal complete-=i
 " cp command copy to system clipboard
 command -range Cp :silent :<line1>,<line2>w !xsel -i -b
 
+" Customize ConflictsMarker plugin
+let g:conflict_marker_highlight_group = ''
+let g:conflict_marker_begin = '^<<<<<<< .*$'
+let g:conflict_marker_end   = '^>>>>>>> .*$'
+highlight ConflictMarkerBegin guibg=#2f7366
+highlight ConflictMarkerOurs guibg=#2e5049
+highlight ConflictMarkerTheirs guibg=#344f69
+highlight ConflictMarkerEnd guibg=#2f628e
+
+" File with .md extension are markdown files
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" Disable section folding by default
+let g:vim_markdown_folding_disabled = 1
+
+" Use black as python formatter
+let g:formatters_python = ['black']
+
 " Autoformat
 command A Autoformat
 cnoreabbrev a A
@@ -169,3 +193,26 @@ cnoreabbrev a A
 command Aw Autoformat | write
 cnoreabbrev aw Aw
 
+" For clang-complete plugin
+let g:clang_library_path='/usr/lib/llvm-10/lib'
+
+" Clang Complete Settings
+let g:clang_use_library=1
+" if there's an error, allow us to see it
+let g:clang_complete_copen=1
+let g:clang_complete_macros=1
+let g:clang_complete_patterns=0
+" Limit memory use
+let g:clang_memory_percent=70
+" Remove -std=c++11 if you don't use C++ for everything like I do.
+let g:clang_user_options=' -std=c++11 || exit 0'
+" Set this to 0 if you don't want autoselect, 1 if you want autohighlight,
+" and 2 if you want autoselect. 0 will make you arrow down to select the first
+" option, 1 will select the first option for you, but won't insert it unless you
+" press enter. 2 will automatically insert what it thinks is right. 1 is the most
+" convenient IMO, and it defaults to 0.
+let g:clang_auto_select=1
+let g:clang_snippets=1
+let g:clang_conceal_snippets=1
+" The single one that works with clang_complete
+let g:clang_snippets_engine='clang_complete'

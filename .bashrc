@@ -4,8 +4,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-	*i*) ;;
-	*) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-	xterm-color|*-256color|screen|tmux) color_prompt=yes;;
+xterm-color | *-256color | screen | tmux) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -58,7 +58,7 @@ fi
 
 # Add git branch if its present to PS1
 parse_git_branch() {
-	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+	git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 # Add red X if last command exit with rc != 0
@@ -78,11 +78,11 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-	xterm*|rxvt*)
-		PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-		;;
-	*)
-		;;
+xterm* | rxvt*)
+	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+	;;
+*) ;;
+
 esac
 
 # enable color support of ls and also add handy aliases
@@ -130,7 +130,10 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:/snap/bin:/usr/games/
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:/snap/bin:/usr/games/:/home/dvi/.local/bin:~/Applications:~/go/bin:~/scripts
+
+# add ccache
+export PATH="/usr/lib/ccache:${PATH}"
 
 alias gits='gits -n -p 8'
 
@@ -151,16 +154,47 @@ ca=~/repos/copy-argos
 
 alias vim="vim -X"
 alias t='date +%R'
+alias g='git'
 
 HISTCONTROL=ignoreboth
 
-export PATH="/usr/lib/ccache:${PATH}"
-
 # Make exit detach tmux sessions instead of killing them
 exit() {
-    if [[ -z $TMUX ]]; then
-        builtin exit
-    else
-        tmux detach
-    fi
+	if [[ -z $TMUX ]]; then
+		builtin exit
+	else
+		tmux detach
+	fi
 }
+
+# Alias to use dedicated graphic card
+alias 'nv'='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
+
+# Ask argos to use dedicated graphic card
+export ARGOS_ENV_DEF="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
+
+# Intel Graphic Card driver
+export MESA_LOADER_DRIVER_OVERRIDE=i965
+
+alias sshwk='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_factory -i ~/.ssh/id_rsa_customer'
+alias scpwk='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_factory -i ~/.ssh/id_rsa_customer'
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+source /opt/intel/vtune_profiler_2020.2.0.610396/vtune-vars.sh
+source /usr/share/autojump/autojump.sh
+
+function f () {
+	TF_PYTHONIOENCODING=$PYTHONIOENCODING;
+	export TF_SHELL=bash;
+	export TF_ALIAS=fuck;
+	export TF_SHELL_ALIASES=$(alias);
+	export TF_HISTORY=$(fc -ln -10);
+	export PYTHONIOENCODING=utf-8;
+	TF_CMD=$(
+	thefuck THEFUCK_ARGUMENT_PLACEHOLDER "$@"
+	) && eval "$TF_CMD";
+	unset TF_HISTORY;
+	export PYTHONIOENCODING=$TF_PYTHONIOENCODING;
+	history -s $TF_CMD;
+}
+export THEFUCK_REQUIRE_CONFIRMATION='false'
