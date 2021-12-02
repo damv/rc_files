@@ -193,26 +193,19 @@ cnoreabbrev a A
 command Aw Autoformat | write
 cnoreabbrev aw Aw
 
-" For clang-complete plugin
-let g:clang_library_path='/usr/lib/llvm-10/lib'
+let g:ale_linters = { 'cpp': ['clangcheck'] }
+let g:ale_fixers = { 'cpp': ['clangtidy'] }
+let g:ale_c_build_dir =  'obj/dev'
+let g:ale_python_flake8_options = '--max-line-length=120'
+let g:ale_completion_enabled = 1
+let g:ale_sign_error = '>'
+let g:ale_sign_warning = '-'
+set scl=no
 
-" Clang Complete Settings
-let g:clang_use_library=1
-" if there's an error, allow us to see it
-let g:clang_complete_copen=1
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
-" Limit memory use
-let g:clang_memory_percent=70
-" Remove -std=c++11 if you don't use C++ for everything like I do.
-let g:clang_user_options=' -std=c++11 || exit 0'
-" Set this to 0 if you don't want autoselect, 1 if you want autohighlight,
-" and 2 if you want autoselect. 0 will make you arrow down to select the first
-" option, 1 will select the first option for you, but won't insert it unless you
-" press enter. 2 will automatically insert what it thinks is right. 1 is the most
-" convenient IMO, and it defaults to 0.
-let g:clang_auto_select=1
-let g:clang_snippets=1
-let g:clang_conceal_snippets=1
-" The single one that works with clang_complete
-let g:clang_snippets_engine='clang_complete'
+let g:rtagsRcCmd = "rtags-rc"
+set completefunc=RtagsCompleteFunc
+noremap gd :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+noremap gD :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
+noremap gc :call rtags#FindRefsCallTree()<CR>
+command RefreshTags !rtags_update
+cnoreabbrev refreshtags RefreshTags
