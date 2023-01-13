@@ -31,6 +31,7 @@
 	decorate = auto
 [pull]
 	rebase = true
+	default = current
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -43,8 +44,13 @@
 [diff]
 	tool = vimdiff
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.gitignore
 [rerere]
 	enabled = true
 [remote "origin"]
 	prune = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+[init]
+	defaultBranch = main

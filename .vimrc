@@ -65,6 +65,7 @@ set wildmode=list:longest,full
 set wildignore+=.git,.svn
 set wildignore+=*.o,*.orig
 set wildignore+=*.wav,*.jpeg,*.jpg,*.mp3,*.aac
+set wildignore+=*.pyc
 
 " fast redraw
 set ttyfast
@@ -105,7 +106,7 @@ set number
 
 " show tabs
 set listchars=tab:\|\ 
-highlight SpecialKey ctermfg=8
+hi SpecialKey ctermfg=8
 
 " show bad char
 set listchars+=nbsp:X
@@ -123,7 +124,7 @@ set norelativenumber
 " Better active split highlight
 hi StatusLine   ctermfg=15 guifg=#ffffff ctermbg=235 guibg=#4e4e4e cterm=none gui=none
 hi StatusLineNC ctermfg=15 guifg=#b2b2b2 ctermbg=235 guibg=#3a3a3a cterm=none gui=none
-highlight VertSplit ctermbg=235 ctermfg=235
+hi VertSplit ctermbg=235 ctermfg=235
 hi LineNr ctermfg=242
 
 " Move easely between splits
@@ -151,13 +152,18 @@ set undodir=~/.vimundo
 " Include vimrc of current dir
 set exrc
 
-" Add pwd to path
+" Add directories of source to path
+" argos
 set path+=$PWD/app/**
 set path+=$PWD/modules/**
+set path+=$PWD/config/**
+set path+=$PWD/documentation/**
+" dcs
 set path+=$PWD/alb_server/**
+set path+=$PWD/tests/**
 
 " Ack use ag
-let g:ackprg = 'ag --vimgrep --smart-case'
+let g:ackprg = 'ag --vimgrep --smart-case --ignore "ctags"'
 cnoreabbrev ag Ack
 cnoreabbrev ack Ack
 
@@ -171,10 +177,15 @@ command -range Cp :silent :<line1>,<line2>w !xsel -i -b
 let g:conflict_marker_highlight_group = ''
 let g:conflict_marker_begin = '^<<<<<<< .*$'
 let g:conflict_marker_end   = '^>>>>>>> .*$'
-highlight ConflictMarkerBegin guibg=#2f7366
-highlight ConflictMarkerOurs guibg=#2e5049
-highlight ConflictMarkerTheirs guibg=#344f69
-highlight ConflictMarkerEnd guibg=#2f628e
+hi ConflictMarkerBegin guibg=#2f7366
+hi ConflictMarkerOurs guibg=#2e5049
+hi ConflictMarkerTheirs guibg=#344f69
+hi ConflictMarkerEnd guibg=#2f628e
+
+
+hi ALESignColumnWithoutErrors guibg=#000000
+hi SignColumn guibg=#000000 ctermbg=354
+
 
 " File with .md extension are markdown files
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
@@ -184,28 +195,74 @@ let g:vim_markdown_folding_disabled = 1
 
 " Use black as python formatter
 let g:formatters_python = ['black']
+let g:formatters_cpp = ['clangformat']
 
-" Autoformat
-command A Autoformat
-cnoreabbrev a A
+autocmd FileType yaml let b:autoformat_autoindent=0
+autocmd FileType yaml let b:autoformat_retab=0
+
+let g:formatdef_yamllint = '"yamllint -"'
+
+" Spell check
+set spell spelllang=en_us
+hi clear SpellBad
+hi clear SpellCap
+hi clear SpellLocal
+hi clear SpellRare
+hi SpellBad cterm=underline
 
 " Autoformat then write
 command Aw Autoformat | write
 cnoreabbrev aw Aw
 
-let g:ale_linters = { 'cpp': ['clangcheck'] }
+let g:ale_linters = { 'cpp': ['clangcheck', 'clangd'] , 'python3': ['flake8', 'mypy', 'pylint', 'pyright'] }
 let g:ale_fixers = { 'cpp': ['clangtidy'] }
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
 let g:ale_c_build_dir =  'obj/dev'
 let g:ale_python_flake8_options = '--max-line-length=120'
 let g:ale_completion_enabled = 1
 let g:ale_sign_error = '>'
 let g:ale_sign_warning = '-'
+let g:ale_sign_warning = '-'
+let g:ale_python_pylint_options = '--disable=R,C,W'
 set scl=no
+
+nmap <silent> <space>p <Plug>(ale_previous_wrap)
+nmap <silent> <space>n <Plug>(ale_next_wrap)
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
 
 let g:rtagsRcCmd = "rtags-rc"
 set completefunc=RtagsCompleteFunc
-noremap gd :call rtags#JumpTo(g:SAME_WINDOW)<CR>
-noremap gD :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
-noremap gc :call rtags#FindRefsCallTree()<CR>
+nnoremap <silent> <Plug>(goCalls) :ALEFindReferences -relative<Return>
+nnoremap <silent> <Plug>(goDef) :ALEGoToDefinition -relative<Return>
+nnoremap <silent> <Plug>(goDefSplit) :ALEGoToDefinition -relative -split<Return>
+nnoremap <silent> <Plug>(goImpl) :ALEGoToImplementation -relative<Return>
+nnoremap <silent> <Plug>(goImplSplit) :ALEGoToImplementation -relative -split<Return>
+nnoremap <silent> <Plug>(goHover) :ALEHover<Return>
+nmap gc <Plug>(goCalls)
+nmap gd <Plug>(goDef)
+nmap <C-w>gd <Plug>(goDefSplit)
+nmap gD <Plug>(goImpl)
+nmap <C-w>gD <Plug>(goImplSplit)
+nmap gh <Plug>(goHover)
+"noremap gc :ALEFindReferences<cr>
+"noremap <C-w>gc :call rtags#JumpTo(g:H_SPLIT, { '--declaration-only' : '' })<CR>
+"noremap gd :ALEGoToDefinition<cr>
+"noremap <C-w>gd :call rtags#JumpTo(g:H_SPLIT)<CR>
+"noremap gD :ALEGoToImplementation<cr>
+"noremap <C-w>gD :call rtags#JumpTo(g:H_SPLIT, { '--declaration-only' : '' })<CR>
+"noremap gh :ALEHover<cr>
+" noremap gd :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+" noremap <C-w>gd :call rtags#JumpTo(g:H_SPLIT)<CR>
+" noremap gD :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
+" noremap <C-w>gD :call rtags#JumpTo(g:H_SPLIT, { '--declaration-only' : '' })<CR>
+" noremap gc :call rtags#FindRefs()<CR>
+" noremap gC :call rtags#FindRefsCallTree()<CR>
 command RefreshTags !rtags_update
 cnoreabbrev refreshtags RefreshTags

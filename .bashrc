@@ -179,8 +179,6 @@ export MESA_LOADER_DRIVER_OVERRIDE=i965
 alias sshwk='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_factory -i ~/.ssh/id_rsa_customer'
 alias scpwk='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_factory -i ~/.ssh/id_rsa_customer'
 
-source /opt/intel/openvino_2021/bin/setupvars.sh
-source /opt/intel/vtune_profiler_2020.2.0.610396/vtune-vars.sh
 source /usr/share/autojump/autojump.sh
 
 function f () {
@@ -198,3 +196,13 @@ function f () {
 	history -s $TF_CMD;
 }
 export THEFUCK_REQUIRE_CONFIRMATION='false'
+alias bcat='batcat'
+alias clang-format='clang-format-12'
+export ALB_PRIVATE_KEY_PATH="$HOME/.ssh/id_rsa_customer"
+
+alias vtune='. /opt/intel/oneapi/setvars.sh || true && vtune-gui'
+
+eval "$(direnv hook bash)"
+
+set show-all-if-ambiguous on
+. "$HOME/.cargo/env"
