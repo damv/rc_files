@@ -144,8 +144,8 @@ PROMPT_COMMAND='echo -ne "\033]0; ${PWD##*/}\007"'
 
 #PROMPT_DIRTRIM=2
 
-alias setclip='xclip -selection c'
-alias getclip='xclip -selection clipboard -o'
+alias c='xclip -selection clipboard'
+alias v='xclip -selection clipboard -o'
 
 # cd shortuts
 shopt -s cdable_vars
@@ -206,3 +206,8 @@ eval "$(direnv hook bash)"
 
 set show-all-if-ambiguous on
 . "$HOME/.cargo/env"
+
+alias vi=nvim
+alias vim=nvim
+alias rvim=vim
+source <(kubectl completion bash)

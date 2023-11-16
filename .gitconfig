@@ -18,12 +18,13 @@
 [push]
 	default = current
 [alias]
-	fixup = "!f() { git commit -m\"fixup! $(git log -1 --pretty=%s $1)\"; }; f"
+	f = "!f() { git commit -m\"fixup! $(git log -1 --pretty=%s $1)\"; }; f"
 	co = checkout
 	br = branch
 	ci = commit
 	st = status
 	sw = switch
+	d = diff
 [format]
 	pretty = oneline
 [log]

@@ -161,6 +161,8 @@ set path+=$PWD/documentation/**
 " dcs
 set path+=$PWD/alb_server/**
 set path+=$PWD/tests/**
+set path+=$PWD/api_communication/**
+set path+=$PWD/system_controller/**
 
 " Ack use ag
 let g:ackprg = 'ag --vimgrep --smart-case --ignore "ctags"'
@@ -214,7 +216,9 @@ hi SpellBad cterm=underline
 command Aw Autoformat | write
 cnoreabbrev aw Aw
 
+" ALE config
 let g:ale_linters = { 'cpp': ['clangcheck', 'clangd'] , 'python3': ['flake8', 'mypy', 'pylint', 'pyright'] }
+let g:ale_cpp_clangcheck_options = '--extra-arg=-std=c++17'
 let g:ale_fixers = { 'cpp': ['clangtidy'] }
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
