@@ -197,7 +197,7 @@ function f () {
 }
 export THEFUCK_REQUIRE_CONFIRMATION='false'
 alias bcat='batcat'
-alias clang-format='clang-format-12'
+alias clang-format='clang-format-14'
 export ALB_PRIVATE_KEY_PATH="$HOME/.ssh/id_rsa_customer"
 
 alias vtune='. /opt/intel/oneapi/setvars.sh || true && vtune-gui'
@@ -210,4 +210,7 @@ set show-all-if-ambiguous on
 alias vi=nvim
 alias vim=nvim
 alias rvim=vim
+alias CloudCompare="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia flatpak run org.cloudcompare.CloudCompare"
 source <(kubectl completion bash)
+
+LD_LIBRARY_PATH=/usr/local/lib
